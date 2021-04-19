@@ -1,0 +1,12 @@
+{
+  "name": "newsreader",
+  "displayName": "newsreader",
+  "expo": {
+    "name": "newsreader",
+    "slug": "newsreader",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
