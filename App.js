@@ -1,7 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 // We need to import useState seperately if we want to refer to it with shorthand
-import React, {useState} from 'react';
+import React, {useState, Component as RC} from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
+
+import {store, retrieve} from './util';
+
 
 export default function App() {
 
@@ -49,12 +52,25 @@ class NewButton extends React.Component {
     const afterStateHandler = () =>
     {
       console.log(`Button has been pressed ${this.state.clicks} times.`);
+      store('clicks', this.state.clicks)
+      .then((result) =>
+      {
+        console.log("I stored something. It should have been: ", this.state.clicks);
+        console.log('Result was: ', result);
+      });
+
     }
     this.setState(myStateObject, afterStateHandler);
 
-
-
-
+    retrieve('clicks')
+    .then((val) =>
+    {
+      console.log('Local storage had val as: ', val);
+    })
+    .catch((err) =>
+    {
+      console.log('Just not having a good day: ', err);
+    })
 
     // execute the code the USER would like to execute
     this.props.onPress();
