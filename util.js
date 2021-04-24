@@ -12,10 +12,12 @@ export const store = async (key, val) =>
     try {
         const storeVal = JSON.stringify(val);
         await AsyncStorage.setItem(key, storeVal);
+        return true;
     }
     catch (error)
     {
         console.log("Something bad happened: ", error);
+        return error;
     }
 }
 
